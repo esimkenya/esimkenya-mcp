@@ -1,0 +1,13 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.esimkenya/mcp",
+  "title": "eSIM Kenya",
+  "description": "Live eSIM provider, plan, pricing, and coverage data for Kenya from esimkenya.com.",
+  "version": "0.1.1",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.esimkenya.com/mcp"
+    }
+  ]
+}
