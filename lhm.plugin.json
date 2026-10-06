@@ -1,0 +1,145 @@
+{
+  "author": "esimkenya",
+  "authorUrl": "https://github.com/esimkenya",
+  "cloudEndpoint": "https://mcp.esimkenya.com/mcp",
+  "description": "Live eSIM provider, plan, pricing, and coverage data for Kenya from esimkenya.com.",
+  "homepage": "https://github.com/esimkenya/esimkenya-mcp",
+  "identifier": "esimkenya-esimkenya-mcp",
+  "name": "eSIM Kenya",
+  "prompts": [],
+  "resources": [],
+  "tools": [
+    {
+      "name": "list_esim_providers",
+      "title": "List eSIM providers for Kenya",
+      "description": "Search and list eSIM providers available in Kenya, with pricing, ratings, coverage, and descriptive fields (best_for, ideal_for/not_ideal_for, pros/cons). Optionally filter by a Kenya destination slug (national park, city, airport, beach, or island) to see providers editorially recommended there, with park-level coverage notes when available. This is the primary lookup tool — reason over the returned structured fields yourself to answer \"best for X\" style questions rather than expecting a pre-computed ranking.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "destination_slug": {
+            "type": "string",
+            "description": "Slug of a Kenya destination, e.g. \"maasai-mara\", \"nairobi\", \"diani-beach\". Filters to providers recommended for that location."
+          },
+          "badge": {
+            "type": "string",
+            "enum": [
+              "top_pick",
+              "popular",
+              "budget",
+              "unlimited"
+            ]
+          },
+          "safari_coverage": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "partial",
+              "no"
+            ]
+          },
+          "min_rating": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 5
+          },
+          "max_price_usd": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "sort_by": {
+            "type": "string",
+            "enum": [
+              "rating",
+              "price",
+              "display_order"
+            ],
+            "default": "display_order"
+          },
+          "limit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 50,
+            "default": 20
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_esim_provider",
+      "title": "Get eSIM provider details and plans",
+      "description": "Get full details for a single eSIM provider by slug, including its review summary/verdict, key facts, FAQs, and every available plan (data amount, duration, price in USD). Use list_esim_providers first to find a provider slug.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "Provider slug, e.g. \"airalo\", \"holafly\", \"safari-esim\"."
+          }
+        },
+        "required": [
+          "slug"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "compare_esim_providers",
+      "title": "Compare two eSIM providers for Kenya",
+      "description": "Compare two eSIM providers by slug. Returns esimkenya.com's curated head-to-head verdict when one exists for that pair, otherwise returns both providers' full details side by side so you can compare them yourself. Use list_esim_providers first to find provider slugs.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "provider_a_slug": {
+            "type": "string",
+            "description": "First provider slug, e.g. \"airalo\"."
+          },
+          "provider_b_slug": {
+            "type": "string",
+            "description": "Second provider slug, e.g. \"holafly\"."
+          }
+        },
+        "required": [
+          "provider_a_slug",
+          "provider_b_slug"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    }
+  ],
+  "version": "0.1.0",
+  "tags": [
+    "esim",
+    "kenya",
+    "travel",
+    "safari",
+    "connectivity"
+  ]
+}

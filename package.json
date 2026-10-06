@@ -1,5 +1,6 @@
 {
   "name": "esimkenya-mcp",
+  "description": "Live eSIM provider, plan, pricing, and coverage data for Kenya from esimkenya.com.",
   "version": "0.1.0",
   "private": true,
   "type": "module",
